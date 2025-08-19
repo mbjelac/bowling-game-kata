@@ -1,38 +1,32 @@
 export class Game {
 
-  private score = 0;
-  private rollCount = 0;
-
-  private spareCount = 0;
+  private readonly rollPins: number[] = [];
 
   roll(numberOfKnockedDownPins: number): void {
-
-    this.increaseRollCount();
-
-    this.score += numberOfKnockedDownPins * this.spareBonus();
-
-    this.spareCount += numberOfKnockedDownPins;
-
+    this.writePins(numberOfKnockedDownPins);
   }
 
-  private increaseRollCount() {
-    if (this.rollCount == 20) {
+  private writePins(pins: number) {
+    if (this.rollPins.length == 20) {
       throw new Error('Cannot roll more than 20 times!');
     }
 
-    this.rollCount++;
-  }
-
-  private spareBonus(): number {
-
-    if(this.spareCount == 10) {
-      return 2;
-    }
-
-    return 1;
+    this.rollPins.push(pins);
   }
 
   getScore(): number {
-    return this.score;
+    let score = 0;
+    this.rollPins.forEach((pins, index) => {
+
+      score+=pins;
+
+      if(index > 0 && index % 2 == 0) {
+        if(this.rollPins[index - 1] + this.rollPins[index-2] == 10) {
+          score+=pins;
+        }
+      }
+    });
+
+    return score;
   }
 }

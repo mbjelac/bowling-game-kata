@@ -24,8 +24,13 @@ it("score is sum of knocked down pins", () => {
 });
 
 it("a spare bonus is next roll's score", () => {
-  whenRollsKnockDown(4, 6, 3);
-  thenScoreIs(16);
+  whenRollsKnockDown(4, 6, 4, 3);
+  thenScoreIs(21);
+});
+
+it("it is not a spare if 10 pins not knocked down within a frame", () => {
+  whenRollsKnockDown(4, 4, 6, 3);
+  thenScoreIs(17);
 });
 
 function whenRollsKnockDown(...pins: number[]) {
