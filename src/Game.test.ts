@@ -25,3 +25,12 @@ it("can not roll more than 20 times", () => {
 
   expect(() => game.roll(1)).toThrow();
 });
+
+it("a spare bonus is next roll's score", () => {
+
+  game.roll(4);
+  game.roll(6);
+  game.roll(3);
+
+  expect(game.getScore()).toBe(16);
+});
