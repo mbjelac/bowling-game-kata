@@ -7,19 +7,20 @@ export class Game {
 
   roll(numberOfKnockedDownPins: number): void {
 
-    if (this.rollCount == 20) {
-      throw new Error('Cannot roll more than 20 times!');
-    }
+    this.increaseRollCount();
 
     this.score += numberOfKnockedDownPins * this.spareBonus();
 
     this.spareCount += numberOfKnockedDownPins;
 
-    this.rollCount++;
   }
 
-  getScore(): number {
-    return this.score;
+  private increaseRollCount() {
+    if (this.rollCount == 20) {
+      throw new Error('Cannot roll more than 20 times!');
+    }
+
+    this.rollCount++;
   }
 
   private spareBonus(): number {
@@ -29,5 +30,9 @@ export class Game {
     }
 
     return 1;
+  }
+
+  getScore(): number {
+    return this.score;
   }
 }
