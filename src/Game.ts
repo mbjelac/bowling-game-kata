@@ -18,11 +18,11 @@ export class Game {
     let score = 0;
     this.rollPins.forEach((pins, index) => {
 
-      score+=pins;
+      score += pins;
 
-      if(index > 0 && index % 2 == 0) {
-        if(this.rollPins[index - 1] + this.rollPins[index-2] == 10) {
-          score+=pins;
+      if (index > 0 && index % 2 == 0) {
+        if (this.rollPins[index - 1] + this.rollPins[index - 2] == 10) {
+          score += pins;
         }
       }
     });
