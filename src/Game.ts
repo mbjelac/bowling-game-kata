@@ -2,6 +2,8 @@ export class Game {
 
   private readonly rollPins: number[] = [];
 
+  private frameFinished = true;
+
   roll(numberOfKnockedDownPins: number): void {
     this.writePins(numberOfKnockedDownPins);
   }
@@ -9,23 +11,29 @@ export class Game {
   private writePins(pins: number) {
 
     if (pins < 0 || pins > 10) {
-      throw new Error(`You cannot knock down ${pins} pins!`);
+      this.throwError(`You cannot knock down ${pins} pins!`);
     }
 
     if (this.rollPins.length == 20) {
-      throw new Error('Cannot roll more than 20 times!');
+      this.throwError('Cannot roll more than 20 times!');
     }
 
     if (
       this.rollPins.length > 0
-      && this.rollPins.length % 2 == 1
+      && !this.frameFinished
       && this.rollPins[this.rollPins.length - 1] + pins > 10
       && this.rollPins[this.rollPins.length - 1] < 10
     ) {
-      throw new Error('Cannot roll more than 10 pins in a frame!');
+      this.throwError('Cannot roll more than 10 pins in a frame!');
     }
 
     this.rollPins.push(pins);
+
+    if (pins == 10) {
+      this.frameFinished = true;
+    } else {
+      this.frameFinished = !this.frameFinished;
+    }
   }
 
   getScore(): number {
@@ -51,5 +59,9 @@ export class Game {
 
   private lastFrameWasStrike(index: number) {
     return this.rollPins[index - 1] == 10;
+  }
+
+  private throwError(message: string) {
+    throw new Error(message + ' ... Rolls: ' + this.rollPins.join(', '));
   }
 }
