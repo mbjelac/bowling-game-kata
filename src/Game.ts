@@ -29,11 +29,7 @@ export class Game {
 
     this.rollPins.push(pins);
 
-    if (pins == 10) {
-      this.frameFinished = true;
-    } else {
-      this.frameFinished = !this.frameFinished;
-    }
+    this.frameFinished = pins == 10 || !this.frameFinished;
   }
 
   getScore(): number {
