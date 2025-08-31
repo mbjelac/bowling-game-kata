@@ -39,7 +39,7 @@ it.each([
   [7, 4],
   [8, 3],
   [9, 2],
-])("can not knock down more than 10 pins in a frame (roll: %s, %s)", (firstRoll: number, secondRoll:number) => {
+])("can not knock down more than 10 pins in a frame (roll: %s, %s)", (firstRoll: number, secondRoll: number) => {
   whenRollsKnockDown(4, 6, 3, 7, 5, 5, firstRoll);
   thenRollIsNotAllowed(secondRoll);
 });
@@ -62,6 +62,11 @@ it("it is not a spare if less than 10 pins knocked down within a frame", () => {
 it("a strike bonus is next roll's score", () => {
   whenRollsKnockDown(10, 3);
   thenScoreIs(16);
+});
+
+it("can not roll more than 10 frames and strikes count as one frame each", () => {
+  whenRollsKnockDown(1, 2, 10, 4, 5, 10, 5, 5, 10, 10, 8, 2, 0, 2, 4, 5);
+  thenRollingIsNoLongerAllowed();
 });
 
 function whenRollsKnockDown(...pins: number[]) {
