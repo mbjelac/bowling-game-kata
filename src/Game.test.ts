@@ -18,6 +18,17 @@ it("can not roll more than 20 times", () => {
   thenRollingIsNoLongerAllowed();
 });
 
+it.each([
+  -1,
+  -100,
+  11,
+  111,
+  101234
+])
+("can not knock down %s pins", (pins: number) => {
+  expect(() => game.roll(pins)).toThrow();
+});
+
 it("score is sum of knocked down pins", () => {
   whenRollsKnockDown(2, 3);
   thenScoreIs(5);

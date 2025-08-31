@@ -7,6 +7,11 @@ export class Game {
   }
 
   private writePins(pins: number) {
+
+    if (pins < 0 || pins > 10) {
+      throw new Error(`You cannot knock down ${pins} pins!`);
+    }
+
     if (this.rollPins.length == 20) {
       throw new Error('Cannot roll more than 20 times!');
     }
@@ -36,6 +41,6 @@ export class Game {
   }
 
   private lastFrameWasStrike(index: number) {
-    return this.rollPins[index-1] == 10;
+    return this.rollPins[index - 1] == 10;
   }
 }
