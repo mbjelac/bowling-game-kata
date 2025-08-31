@@ -16,6 +16,15 @@ export class Game {
       throw new Error('Cannot roll more than 20 times!');
     }
 
+    if (
+      this.rollPins.length > 0
+      && this.rollPins.length % 2 == 1
+      && this.rollPins[this.rollPins.length - 1] + pins > 10
+      && this.rollPins[this.rollPins.length - 1] < 10
+    ) {
+      throw new Error('Cannot roll more than 10 pins in a frame!');
+    }
+
     this.rollPins.push(pins);
   }
 

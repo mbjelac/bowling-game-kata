@@ -26,7 +26,22 @@ it.each([
   101234
 ])
 ("can not knock down %s pins", (pins: number) => {
-  expect(() => game.roll(pins)).toThrow();
+  thenRollIsNotAllowed(pins);
+});
+
+it.each([
+  [1, 10],
+  [2, 9],
+  [3, 8],
+  [4, 7],
+  [5, 6],
+  [6, 5],
+  [7, 4],
+  [8, 3],
+  [9, 2],
+])("can not knock down more than 10 pins in a frame (roll: %s, %s)", (firstRoll: number, secondRoll:number) => {
+  whenRollsKnockDown(4, 6, 3, 7, 5, 5, firstRoll);
+  thenRollIsNotAllowed(secondRoll);
 });
 
 it("score is sum of knocked down pins", () => {
@@ -55,6 +70,10 @@ function whenRollsKnockDown(...pins: number[]) {
 
 function thenRollingIsNoLongerAllowed() {
   expect(() => game.roll(1)).toThrow();
+}
+
+function thenRollIsNotAllowed(pins: number) {
+  expect(() => game.roll(pins)).toThrow();
 }
 
 function thenScoreIs(expectedScore: number) {
