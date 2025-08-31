@@ -28,7 +28,7 @@ it("a spare bonus is next roll's score", () => {
   thenScoreIs(21);
 });
 
-it("it is not a spare if 10 pins not knocked down within a frame", () => {
+it("it is not a spare if less than 10 pins knocked down within a frame", () => {
   whenRollsKnockDown(4, 4, 6, 3);
   thenScoreIs(17);
 });
