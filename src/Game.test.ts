@@ -8,14 +8,14 @@ beforeEach(() => {
 });
 
 it("can not roll more than 20 times", () => {
-
-  Array(20)
-  .fill(0)
-  .forEach(() => {
-    game.roll(1);
-  });
-
-  expect(() => game.roll(1)).toThrow();
+  whenRollsKnockDown(
+    1, 1, 1, 1,
+    1, 1, 1, 1,
+    1, 1, 1, 1,
+    1, 1, 1, 1,
+    1, 1, 1, 1
+  );
+  thenRollingIsNoLongerAllowed();
 });
 
 it("score is sum of knocked down pins", () => {
@@ -35,6 +35,10 @@ it("it is not a spare if less than 10 pins knocked down within a frame", () => {
 
 function whenRollsKnockDown(...pins: number[]) {
   pins.forEach(pin => game.roll(pin));
+}
+
+function thenRollingIsNoLongerAllowed() {
+  expect(() => game.roll(1)).toThrow();
 }
 
 function thenScoreIs(expectedScore: number) {
