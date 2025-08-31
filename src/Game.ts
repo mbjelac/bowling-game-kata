@@ -20,13 +20,22 @@ export class Game {
 
       score += pins;
 
-      if (index > 0 && index % 2 == 0) {
-        if (this.rollPins[index - 1] + this.rollPins[index - 2] == 10) {
+      if (index > 0) {
+        if (this.lastFrameWasSpare(index) || this.lastFrameWasStrike(index)) {
           score += pins;
         }
       }
     });
 
     return score;
+  }
+
+
+  private lastFrameWasSpare(index: number) {
+    return index % 2 == 0 && this.rollPins[index - 1] + this.rollPins[index - 2] == 10;
+  }
+
+  private lastFrameWasStrike(index: number) {
+    return this.rollPins[index-1] == 10;
   }
 }

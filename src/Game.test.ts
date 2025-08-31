@@ -33,6 +33,11 @@ it("it is not a spare if less than 10 pins knocked down within a frame", () => {
   thenScoreIs(17);
 });
 
+it("a strike bonus is next roll's score", () => {
+  whenRollsKnockDown(10, 3);
+  thenScoreIs(16);
+});
+
 function whenRollsKnockDown(...pins: number[]) {
   pins.forEach(pin => game.roll(pin));
 }
