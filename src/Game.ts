@@ -4,6 +4,8 @@ export class Game {
 
   private frameFinished = true;
 
+  private finishedFrames = 0;
+
   roll(numberOfKnockedDownPins: number): void {
     this.writePins(numberOfKnockedDownPins);
   }
@@ -18,6 +20,10 @@ export class Game {
       this.throwError('Cannot roll more than 20 times!');
     }
 
+    if(this.finishedFrames==10){
+      this.throwError("Cannot play more than 10 frames!");
+    }
+
     if (
       this.rollPins.length > 0
       && !this.frameFinished
@@ -30,6 +36,10 @@ export class Game {
     this.rollPins.push(pins);
 
     this.frameFinished = pins == 10 || !this.frameFinished;
+
+    if(this.frameFinished) {
+      this.finishedFrames++;
+    }
   }
 
   getScore(): number {
