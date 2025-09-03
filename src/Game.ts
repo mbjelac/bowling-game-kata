@@ -16,10 +16,6 @@ export class Game {
       this.throwError(`You cannot knock down ${pins} pins!`);
     }
 
-    if (this.rollPins.length == 20) {
-      this.throwError('Cannot roll more than 20 times!');
-    }
-
     if(this.finishedFrames==10){
       this.throwError("Cannot play more than 10 frames!");
     }
