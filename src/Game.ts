@@ -5,6 +5,10 @@ export class Game {
     this.validate(numberOfKnockedDownPins);
 
     this.score += numberOfKnockedDownPins;
+
+    if (this.score > 10) {
+      throw new Error();
+    }
   }
 
   private validate(numberOfKnockedDownPins: number) {

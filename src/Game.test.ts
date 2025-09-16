@@ -33,6 +33,10 @@ it("score is equal to sum of knocked down pins", () => {
   expect(game.getScore()).toEqual(7);
 });
 
+it("can not roll more than 10 pins in each frame", () => {
+  roll(4);
+  cannotRoll(8);
+});
 
 function roll(pins: number) {
   game.roll(pins);
