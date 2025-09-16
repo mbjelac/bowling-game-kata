@@ -65,6 +65,11 @@ it("spare bonus is the number of points of next roll", () => {
   expect(game.getScore()).toEqual(16);
 });
 
+it("spare applied only for first roll", () => {
+  roll(5, 5, 3, 4);
+  expect(game.getScore()).toEqual(20);
+});
+
 function roll(...rolls: number[]) {
   rolls.forEach(pins => game.roll(pins));
 }
