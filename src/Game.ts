@@ -10,7 +10,7 @@ export class Game {
   roll(numberOfKnockedDownPins: number): void {
     this.validate(numberOfKnockedDownPins);
 
-    if(this.isNewFrame) {
+    if (this.isNewFrame) {
       this.previousFrameScore = this.frameScore;
       this.frameScore = 0;
     }
@@ -22,15 +22,17 @@ export class Game {
       throw new Error();
     }
 
-    if(
+    const spareBonus =
       this.previousFrameScore == 10
       && this.isNewFrame
-    ) {
-      this.score += numberOfKnockedDownPins;
-    }
+        ? numberOfKnockedDownPins
+        : 0
 
     this.frameScore += numberOfKnockedDownPins;
-    this.score = this.score + numberOfKnockedDownPins;
+    this.score =
+      this.score
+      + numberOfKnockedDownPins
+      + spareBonus;
     this.isNewFrame = !this.isNewFrame;
   }
 
