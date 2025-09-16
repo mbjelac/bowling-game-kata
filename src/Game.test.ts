@@ -19,7 +19,7 @@ it("can not knock down negative number of pins", () => {
 });
 
 it("can knock down 10 pins or less", () => {
-  expect(() => roll(10)).not.toThrow();
+  canRoll(10);
 });
 
 it("score is zero when zero pins knocked down", () => {
@@ -57,8 +57,14 @@ it("can again roll up to 10 pins in new frame", () => {
   roll(4);
   roll(5);
 
-  expect(() => roll(5)).not.toThrow();
+  canRoll(5);
   expect(game.getScore()).toEqual(23);
+});
+
+it("empty rolls also count towards frame", () => {
+  roll(0);
+  roll(6);
+  canRoll(7);
 });
 
 function roll(pins: number) {
@@ -68,4 +74,8 @@ function roll(pins: number) {
 function cannotRoll(pins: number) {
   expect(() => roll(pins)).toThrow();
 
+}
+
+function canRoll(pins: number) {
+  expect(() => roll(pins)).not.toThrow();
 }
