@@ -15,12 +15,7 @@ export class Game {
       this.frameScore = 0;
     }
 
-    if (
-      !this.isNewFrame
-      && this.frameScore + numberOfKnockedDownPins > 10
-    ) {
-      throw new Error();
-    }
+    this.checkFramePinsExceeded(numberOfKnockedDownPins);
 
     const spareBonus =
       this.previousFrameScore == 10
@@ -34,6 +29,15 @@ export class Game {
       + numberOfKnockedDownPins
       + spareBonus;
     this.isNewFrame = !this.isNewFrame;
+  }
+
+  private checkFramePinsExceeded(numberOfKnockedDownPins: number) {
+    if (
+      !this.isNewFrame
+      && this.frameScore + numberOfKnockedDownPins > 10
+    ) {
+      throw new Error();
+    }
   }
 
   private validate(numberOfKnockedDownPins: number) {
