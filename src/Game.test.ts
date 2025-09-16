@@ -43,9 +43,11 @@ it("can not roll more than 10 pins in each frame", () => {
 it("can again roll up to 10 pins in new frame", () => {
   roll(4);
   roll(5);
+  roll(4);
+  roll(5);
 
   expect(() => roll(5)).not.toThrow();
-  expect(game.getScore()).toEqual(14);
+  expect(game.getScore()).toEqual(23);
 });
 
 function roll(pins: number) {
