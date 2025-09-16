@@ -4,11 +4,13 @@ export class Game {
   roll(numberOfKnockedDownPins: number): void {
     this.validate(numberOfKnockedDownPins);
 
-    this.score += numberOfKnockedDownPins;
+    const currentScore = this.score + numberOfKnockedDownPins;
 
-    if (this.score > 10) {
+    if (currentScore > 10) {
       throw new Error();
     }
+
+    this.score = currentScore;
   }
 
   private validate(numberOfKnockedDownPins: number) {
