@@ -1,11 +1,19 @@
 export class Game {
+  private score = 0;
 
   roll(numberOfKnockedDownPins: number): void {
-    throw new Error();
+    if (
+      numberOfKnockedDownPins < 0
+      || numberOfKnockedDownPins > 10
+    ) {
+      throw new Error();
+    }
+
+    this.score = numberOfKnockedDownPins;
   }
 
   getScore(): number {
-    return 0;
+    return this.score;
   }
 
 }

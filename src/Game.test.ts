@@ -7,5 +7,33 @@ beforeEach(() => {
 });
 
 it("can not knock down more than 10 pins", () => {
-  expect(() => game.roll(11)).toThrow();
+  cannotRoll(11);
 });
+
+it("can not knock down negative number of pins", () => {
+  cannotRoll(-1);
+});
+
+it("can knock down 10 pins or less", () => {
+  expect(() => roll(10)).not.toThrow();
+});
+
+it("initial score is 0", () => {
+  expect(game.getScore()).toEqual(0);
+});
+
+it("score is equal to knocked down pins", () => {
+  roll(3);
+  expect(game.getScore()).toEqual(3);
+});
+
+
+
+function roll(pins: number) {
+  game.roll(pins);
+}
+
+function cannotRoll(pins: number) {
+  expect(() => roll(pins)).toThrow();
+
+}
