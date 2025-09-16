@@ -6,6 +6,10 @@ beforeEach(() => {
   game = new Game();
 });
 
+it("initial score is 0", () => {
+  expect(game.getScore()).toEqual(0);
+});
+
 it("can not knock down more than 10 pins", () => {
   cannotRoll(11);
 });
@@ -18,7 +22,8 @@ it("can knock down 10 pins or less", () => {
   expect(() => roll(10)).not.toThrow();
 });
 
-it("initial score is 0", () => {
+it("score is zero when zero pins knocked down", () => {
+  roll(0);
   expect(game.getScore()).toEqual(0);
 });
 
