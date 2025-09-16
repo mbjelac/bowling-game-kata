@@ -27,6 +27,11 @@ it("score is equal to knocked down pins", () => {
   expect(game.getScore()).toEqual(3);
 });
 
+it("score is equal to sum of knocked down pins", () => {
+  roll(3);
+  roll(4);
+  expect(game.getScore()).toEqual(7);
+});
 
 
 function roll(pins: number) {
