@@ -27,16 +27,25 @@ it("score is equal to knocked down pins", () => {
   expect(game.getScore()).toEqual(3);
 });
 
-it("score is equal to sum of knocked down pins", () => {
-  roll(3);
+it("frame score is sum of two rolls", () => {
   roll(4);
-  expect(game.getScore()).toEqual(7);
+  roll(5);
+  expect(game.getScore()).toEqual(9);
 });
 
 it("can not roll more than 10 pins in each frame", () => {
   roll(4);
   cannotRoll(8);
   expect(game.getScore()).toEqual(4);
+});
+
+
+it("can again roll up to 10 pins in new frame", () => {
+  roll(4);
+  roll(5);
+
+  expect(() => roll(5)).not.toThrow();
+  expect(game.getScore()).toEqual(14);
 });
 
 function roll(pins: number) {
