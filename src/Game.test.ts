@@ -70,6 +70,11 @@ it("spare applied only for first roll", () => {
   expect(game.getScore()).toEqual(20);
 });
 
+it("spare not counted in pin frame limit", () => {
+  roll(5, 5, 3, 5);
+  expect(game.getScore()).toEqual(21);
+});
+
 function roll(...rolls: number[]) {
   rolls.forEach(pins => game.roll(pins));
 }
