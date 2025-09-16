@@ -28,8 +28,7 @@ it("score is zero when zero pins knocked down", () => {
 });
 
 it("score is zero when zero pins knocked down twice", () => {
-  roll(0);
-  roll(0);
+  roll(0, 0);
   expect(game.getScore()).toEqual(0);
 });
 
@@ -39,8 +38,7 @@ it("score is equal to knocked down pins", () => {
 });
 
 it("frame score is sum of two rolls", () => {
-  roll(4);
-  roll(5);
+  roll(4, 5);
   expect(game.getScore()).toEqual(9);
 });
 
@@ -52,18 +50,13 @@ it("can not roll more than 10 pins in each frame", () => {
 
 
 it("can again roll up to 10 pins in new frame", () => {
-  roll(4);
-  roll(5);
-  roll(4);
-  roll(5);
-
+  roll(4, 5, 4, 5);
   canRoll(5);
   expect(game.getScore()).toEqual(23);
 });
 
 it("empty rolls also count towards frame", () => {
-  roll(0);
-  roll(6);
+  roll(0,6);
   canRoll(7);
 });
 
