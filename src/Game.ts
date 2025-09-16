@@ -12,8 +12,6 @@ export class Game {
       this.frameScore = 0;
     }
 
-    const currentScore = this.score + numberOfKnockedDownPins;
-
     if (
       !this.isNewFrame
       && this.frameScore + numberOfKnockedDownPins > 10
@@ -22,7 +20,7 @@ export class Game {
     }
 
     this.frameScore = numberOfKnockedDownPins;
-    this.score = currentScore;
+    this.score = this.score + numberOfKnockedDownPins;
     this.isNewFrame = !this.isNewFrame;
   }
 
