@@ -27,6 +27,12 @@ it("score is zero when zero pins knocked down", () => {
   expect(game.getScore()).toEqual(0);
 });
 
+it("score is zero when zero pins knocked down twice", () => {
+  roll(0);
+  roll(0);
+  expect(game.getScore()).toEqual(0);
+});
+
 it("score is equal to knocked down pins", () => {
   roll(3);
   expect(game.getScore()).toEqual(3);
