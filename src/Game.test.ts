@@ -67,6 +67,13 @@ it("empty rolls also count towards frame", () => {
   canRoll(7);
 });
 
+it("spare bonus is the number of points of next roll", () => {
+  roll(5);
+  roll(5);
+  roll(3);
+  expect(game.getScore()).toEqual(16);
+});
+
 function roll(pins: number) {
   game.roll(pins);
 }
